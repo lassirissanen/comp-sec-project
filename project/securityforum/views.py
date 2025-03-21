@@ -32,7 +32,7 @@ def create_post(request):
     content = data["content"]
     if header == "" or content == "":
         return render(request, "securityforum/post_form.html", {"error_message": "Please give both header and content"})
-    author = User.objects.get(username="cool_dev")
+    author = request.user
     new_post = Post(header=header, content=content,
                     pub_date=datetime.now(), author=author)
     new_post.save()

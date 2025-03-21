@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security Forum</title>
-  </head>
-  <body>
-    <header>
-      <h1>Security Forum</h1>
-    </header>
-    <a href={% url "securityforum:home" %}>home</a>
-    <h2>{{post.author.username}}: {{ post.header }}</h2>
-    <p>{{ post.content }}</p>
-  </body>
-</html>
+{% extends "securityforum/base_generic.html" %}
+
+{% block content %}
+  <a href={% url "securityforum:home" %}>home</a>
+  <h2>{{post.author.username}}: {{ post.header }}</h2>
+  <p>{{ post.content }}</p>
+{% endblock content %}

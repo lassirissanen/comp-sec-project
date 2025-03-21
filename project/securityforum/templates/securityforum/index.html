@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security Forum</title>
-    {% load static %}
-    <link rel="stylesheet" href={% static "securityforum/style.css" %}/>
-  </head>
-  <body>
-    <header>
-      <h1>Security Forum</h1>
-    </header>
-    {% if posts %}
-    <a href={% url "securityforum:post_form" %}>Add a post</a>
-    <ul id="post-list">
-      {% for post in posts %}
-      <li>
-        <div class="post">
-          <a href={% url "securityforum:post" post.id%}>{{ post.header }}</a>
-          <p>{{ post.content }}</p>
-          <a class="post-author">Author: {{ post.author.username }}</a>
-        </div>
-      </li>
-      <hr>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>Nobody likes to talk about security :/</p>
-    <a href={% url "securityforum:post_form" %}>Start a conversation by making a post!</a>
-    {% endif %}
-  </body>
-</html>
+{% extends "securityforum/base_generic.html" %}
+
+{% block content %}
+  {% if posts %}
+  <a href={% url "securityforum:post_form" %}>Add a post</a>
+  <ul id="post-list">
+    {% for post in posts %}
+    <li>
+      <div class="post">
+        <a href={% url "securityforum:post" post.id%}>{{ post.header }}</a>
+        <p>{{ post.content }}</p>
+        <a class="post-author">Author: {{ post.author.username }}</a>
+      </div>
+    </li>
+    <hr>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Nobody likes to talk about security :/</p>
+  <a href={% url "securityforum:post_form" %}>Start a conversation by making a post!</a>
+  {% endif %}
+{% endblock content %}
