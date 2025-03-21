@@ -11,8 +11,8 @@
     <header>
       <h1>Security Forum</h1>
     </header>
-    <a href={% url "securityforum:post_form" %}>Add a post</a>
     {% if posts %}
+    <a href={% url "securityforum:post_form" %}>Add a post</a>
     <ul id="post-list">
       {% for post in posts %}
       <li>
