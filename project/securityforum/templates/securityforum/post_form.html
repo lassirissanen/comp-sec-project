@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Forum</title>
+  </head>
+  <body>
+    <header>
+      <h1>Security Forum</h1>
+    </header>
+    <a href={% url "securityforum:home" %}>home</a>
+    <form action={% url "securityforum:create_post"%} method="post">
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      {% csrf_token %}
+      <legend><h2>Create a new post</h2></legend>
+      <label for="post-header-input">header:</label>
+      <input id="post-header-input" name="header" type="text" required/>
+      <br/>
+      <label for="post-content-textarea">content:</label>
+      <textarea id="post-content-textarea" name="content" required></textarea>
+      <br/>
+      <input type="submit" value="Create a post">
+    </form>
+  </body>
+</html>

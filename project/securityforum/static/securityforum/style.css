@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+#post-list {
+    list-style-type: none; /* Remove bullets */
+
+    li {
+        border-radius: 1em;
+        padding: 1em;
+    }
+
+    li:hover {
+        background-color: rgb(246, 246, 246);
+    }
+    
+    hr {
+        margin: 0 1em;
+        color: rgba(206, 206, 206, 0.556);
+    }
+}
+
+.post-author {
+    font-size: 80%;
+}
