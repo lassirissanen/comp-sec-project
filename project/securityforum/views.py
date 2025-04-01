@@ -16,7 +16,7 @@ class HomeView(generic.ListView):
         return Post.objects.all()
 
 
-class PostView(generic.DeleteView):
+class PostView(generic.DetailView):
     model = Post
     context_object_name = "post"
     template_name = "securityforum/post.html"
