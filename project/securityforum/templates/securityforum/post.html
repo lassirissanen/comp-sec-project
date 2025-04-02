@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block stylesheet %}<link rel="stylesheet" href={% static "securityforum/css/post.css" %}/>{% endblock stylesheet %}
+{% block script %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-comment');
+    const commentForm = document.getElementById('comment-form');
+    const cancelBtn = document.getElementById('cancel-comment');
+  
+    toggleBtn.addEventListener('click', () => {
+      toggleBtn.style.display = 'none';
+      commentForm.style.display = 'block';
+    });
+  
+    cancelBtn.addEventListener('click', () => {
+      commentForm.style.display = 'none';
+      toggleBtn.style.display = 'block';
+    });
+  });
+</script>
+{% endblock script %}
 
 {% block content %}
   <a href={% url "securityforum:home" %}>home</a>
@@ -11,6 +30,21 @@
     <p>{{ post.content }}</p>
   </div>
   <div id="comments-container">
+    {% if user.is_authenticated %}
+    <div id="add-comment-section">
+      <button id="toggle-comment" class="btn btn-primary">Add Comment</button>
+      
+      <div id="comment-form" style="display:none">
+        <form method="POST" action="{% url "securityforum:add_comment" %}">
+          {% csrf_token %}
+          <input type="text" name="post_id" value={{post.id}} hidden>
+          <textarea id="comment-textarea" name="content" placeholder="Comment here..." required></textarea>
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" id="cancel-comment" class="btn btn-secondary">Cancel</button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
     <ul id="comments-list">
       {% for comment in post.comment_set.all%}
         <li>

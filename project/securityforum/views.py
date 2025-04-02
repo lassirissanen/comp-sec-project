@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from .models import Post, User
+from .models import Post, Comment
 from datetime import datetime
 
 # Create your views here.
@@ -37,3 +37,14 @@ def create_post(request):
                     pub_date=datetime.now(), author=author)
     new_post.save()
     return HttpResponseRedirect(reverse("securityforum:post", args=(new_post.id,)))
+
+
+def add_comment(request):
+    data = request.POST
+    content = data["content"]
+    post_id = data["post_id"]
+    post = Post.objects.get(id=post_id)
+    author = request.user
+    new_comment = Comment(content=content, author=author, post=post)
+    new_comment.save()
+    return HttpResponseRedirect(reverse("securityforum:post", args=(post_id,)))
