@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from .models import Post, Comment
+from .forms import ProfileUpdateForm
 from datetime import datetime
 
 # Create your views here.
@@ -48,3 +49,15 @@ def add_comment(request):
     new_comment = Comment(content=content, author=author, post=post)
     new_comment.save()
     return HttpResponseRedirect(reverse("securityforum:post", args=(post_id,)))
+
+
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("securityforum:home", args=(request.user.profile,)))
+    else:
+        form = ProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'securityforum/update_profile.html', {'form': form})

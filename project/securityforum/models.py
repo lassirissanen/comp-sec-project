@@ -23,3 +23,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"author: {self.author.id}, content: {self.content}, pub_date: {self.pub_date.isoformat()}"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=250, null=True, blank=True)
+    profile_pic = models.ImageField(
+        upload_to='profile_pics/', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'

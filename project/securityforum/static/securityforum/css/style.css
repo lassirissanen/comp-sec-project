@@ -22,5 +22,18 @@ body {
 }
 
 .post-author {
-    font-size: 80%;
+    display: flex;
+    align-items: center;
+    /* font-size: 80%; */
+    gap: 10px;
+    margin-bottom: 1em;
 }
+
+.profile-pic {
+    width: 35px; /* Set the desired width */
+    height: 35px; /* Set the desired height */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image is cropped to fit within the circle */
+    border: 2px solid #ddd; /* Optional: Add a border for better appearance */
+}
+
