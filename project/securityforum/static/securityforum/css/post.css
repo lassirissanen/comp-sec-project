@@ -1,0 +1,29 @@
+#post-detail-container {
+    margin-top: 2em;
+}
+
+#post-header {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+#comments-container {
+    margin-top: 2em;
+}
+
+#comments-list {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+        border-left: 2px;
+        border-left-style: solid;
+        border-left-color: rgb(198, 198, 198);
+        padding-inline: 0.5em;
+    }
+}
+
+.comment-content {
+    padding-left: 1em;
+}
+

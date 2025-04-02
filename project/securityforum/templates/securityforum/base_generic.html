@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Security Forum{% endblock title %}</title>
     {% load static %}
-    <link rel="stylesheet" href={% static "securityforum/style.css" %}/>
+    <link rel="stylesheet" href={% static "securityforum/css/style.css" %}/>
+    {% block stylesheet %}{% endblock stylesheet %}
   </head>
   <body>
     <header>
