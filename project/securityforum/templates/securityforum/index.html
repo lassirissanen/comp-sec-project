@@ -1,5 +1,8 @@
 {% extends "securityforum/base_generic.html" %}
 {% load static %}
+
+{% block stylesheet %}<link rel="stylesheet" href={% static "securityforum/css/home.css" %}/>{% endblock stylesheet %}
+
 {% block content %}
   {% if posts %}
   <a href={% url "securityforum:post_form" %}>Add a post</a>

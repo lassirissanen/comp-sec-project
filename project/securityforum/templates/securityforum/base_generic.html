@@ -4,23 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Security Forum{% endblock title %}</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.019/css/hack-extended.min.css">
     {% load static %}
     <link rel="stylesheet" href={% static "securityforum/css/style.css" %}/>
     {% block stylesheet %}{% endblock stylesheet %}
     {% block script %}{% endblock script %}
   </head>
   <body>
-    <header>
-      <h1><a href={% url "securityforum:home" %}>Security Forum</a></h1>
-      {% if not user.is_authenticated  %}
-      <a href={% url "accounts:login" %}>login</a>
-      {% else %}
-      <a>{{ user.username }}</a>
-      <form action={% url "accounts:logout" %} method="post">
-        {% csrf_token %}
-        <input type="submit" value="logout"/>
-      </form>
-      {% endif %}
+    <header id="page-header-container">
+      <div id="header-title">
+        <img src={% static "securityforum/images/cyber-shield.png" %} alt="Cyber Shield" id="header-image">
+        <h1 id="header-text"><a href={% url "securityforum:home" %}>Security Forum</a></h1>
+      </div>
+      <div id="page-header-user">
+        {% if not user.is_authenticated  %}
+          <a href={% url "accounts:login" %}>login</a>
+        {% else %}
+          {% if user.profile.profile_pic %}
+            <img src="{{ user.profile.profile_pic.url }}" class="profile-pic" alt="Profile Picture">
+          {% else %}
+            <img src="{% static 'images/default_profile.jpg' %}" class="profile-pic" alt="Default Profile Picture">
+          {% endif %}
+          <a>{{ user.username }}</a>
+          <form action={% url "accounts:logout" %} method="post">
+            {% csrf_token %}
+            <input id="logout-btn" type="submit" value="logout"/>
+          </form>
+        {% endif %}
+      </div>
     </header>
     <div>
         {% block content %}{% endblock content %}
