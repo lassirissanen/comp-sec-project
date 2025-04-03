@@ -14,8 +14,7 @@ body {
 #header-title {
     display: flex;
     align-items: center;
-    font-family: 'Hack', monospace;
-    font-size: 20px; /* Adjust size as needed */
+    font-size: 16px; /* Adjust size as needed */
     font-weight: 900; /* Default weight */
     text-align: center;
     text-shadow: 0 0.01em, 0.01em 0, 0.01em 0.01em;
@@ -30,12 +29,8 @@ body {
 #header-image {
     margin-right: 15px; /* Adds space between text and image */
     width: auto; /* Set desired width */
-    height: 100px; /* Maintains aspect ratio */
+    height: 60px; /* Maintains aspect ratio */
 }
-
-
-
-
 
 #page-header-user {
     display: flex;
@@ -43,6 +38,19 @@ body {
     gap: 0.5em;
 }
 
+.profile-pic {
+    width: 35px; /* Set the desired width */
+    height: 35px; /* Set the desired height */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image is cropped to fit within the circle */
+    border: 2px solid #ddd; /* Optional: Add a border for better appearance */
+}
+
 #logout-btn {
     margin-left: 1em;
+}
+
+
+#page-content {
+    padding-inline: 1em;
 }
