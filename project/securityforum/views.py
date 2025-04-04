@@ -57,7 +57,7 @@ def update_profile(request):
             request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("securityforum:home", args=(request.user.profile,)))
+            return HttpResponseRedirect(reverse("securityforum:home"))
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'securityforum/update_profile.html', {'form': form})
