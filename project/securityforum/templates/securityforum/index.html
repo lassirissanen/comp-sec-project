@@ -11,8 +11,8 @@
     <li>
       <div class="post">
         <div class="post-author">
-          {% if user.profile.profile_pic %}
-          <img src="{{ user.profile.profile_pic.url }}" class="profile-pic" alt="Profile Picture">
+          {% if post.author.profile.profile_pic %}
+          <img src="{{ post.author.profile.profile_pic.url }}" class="profile-pic" alt="Profile Picture">
           {% else %}
           <img src="{% static 'images/default_profile.jpg' %}" class="profile-pic" alt="Default Profile Picture">
           {% endif %}
