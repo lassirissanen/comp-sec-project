@@ -5,6 +5,7 @@ from django.views import generic
 from .models import Post, Comment, Profile
 from .forms import ProfileUpdateForm
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -23,10 +24,12 @@ class PostView(generic.DetailView):
     template_name = "securityforum/post.html"
 
 
+@login_required
 def post_form(request):
     return render(request, "securityforum/post_form.html", {})
 
 
+@login_required
 def create_post(request):
     data = request.POST
     header = data["header"]
@@ -40,6 +43,7 @@ def create_post(request):
     return HttpResponseRedirect(reverse("securityforum:post", args=(new_post.id,)))
 
 
+@login_required
 def add_comment(request):
     data = request.POST
     content = data["content"]
@@ -57,6 +61,7 @@ class ProfileView(generic.DetailView):
     template_name = "securityforum/user_profile.html"
 
 
+@login_required
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(
