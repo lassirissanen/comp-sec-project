@@ -23,6 +23,14 @@
     }
 }
 
+.post-author {
+    display: flex;
+    align-items: center;
+    /* font-size: 80%; */
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
 .comment-content {
     padding-left: 1em;
 }

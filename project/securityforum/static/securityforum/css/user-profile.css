@@ -1,0 +1,17 @@
+#profile-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+}
+
+#profile-pic {
+  width: 100px; /* Set the desired width */
+  height: 100px; /* Set the desired height */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image is cropped to fit within the circle */
+  border: 2px solid #ddd; /* Optional: Add a border for better appearance */
+}
+
+#username {
+  font-size: large;
+}

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 from .forms import ProfileUpdateForm
 from datetime import datetime
 
@@ -49,6 +49,12 @@ def add_comment(request):
     new_comment = Comment(content=content, author=author, post=post)
     new_comment.save()
     return HttpResponseRedirect(reverse("securityforum:post", args=(post_id,)))
+
+
+class ProfileView(generic.DetailView):
+    model = Profile
+    context_object_name = "user_profile"
+    template_name = "securityforum/user_profile.html"
 
 
 def update_profile(request):

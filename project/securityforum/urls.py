@@ -9,5 +9,6 @@ urlpatterns = [
     path("post_form", views.post_form, name="post_form"),
     path("create_post", views.create_post, name="create_post"),
     path("add_comment", views.add_comment, name="add_comment"),
+    path("profiles/<pk>", views.ProfileView.as_view(), name="profile"),
     path("update_profile", views.update_profile, name="update_profile")
 ]

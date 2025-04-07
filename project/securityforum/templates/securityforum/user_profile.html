@@ -1,0 +1,28 @@
+{% extends "securityforum/base_generic.html" %}
+{% load static %}
+{% block stylesheet %}<link rel="stylesheet" href={% static "securityforum/css/user-profile.css" %}/>{% endblock stylesheet %}
+
+{% block content %} 
+<div id="user-profile-container">
+  <div id="profile-header">
+    {% if user_profile.profile_pic %}
+    <img
+      src="{{ user_profile.profile_pic.url }}"
+      id="profile-pic"
+      alt="Profile Picture"
+    />
+    {% else %}
+    <img
+      src="{% static 'images/default_profile.jpg' %}"
+      id="profile-pic"
+      alt="Default Profile Picture"
+    />
+    {% endif %}
+    <p id="username">{{ user_profile.user.username }}</p>
+  </div>
+  <p>"{{ user_profile.bio }}"</p>
+  {% if user.is_authenticated and user_profile.id == user.profile.id %}
+    <a href={% url "securityforum:update_profile" %}>Update profile</a>
+  {% endif %}
+</div>
+{% endblock content %}

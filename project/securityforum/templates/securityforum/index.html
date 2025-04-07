@@ -16,7 +16,7 @@
           {% else %}
           <img src="{% static 'images/default_profile.jpg' %}" class="profile-pic" alt="Default Profile Picture">
           {% endif %}
-          <a class="post-author-username">{{ post.author.username }}</a>
+          <a class="post-author-username" href={% url "securityforum:profile" post.author.profile.id%}>{{ post.author.username }}</a>
         </div>
         <a href={% url "securityforum:post" post.id%}>{{ post.header }}</a>
         <p>{{ post.content }}</p>

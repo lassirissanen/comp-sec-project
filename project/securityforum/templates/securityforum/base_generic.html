@@ -25,7 +25,7 @@
           {% else %}
             <img src="{% static 'images/default_profile.jpg' %}" class="profile-pic" alt="Default Profile Picture">
           {% endif %}
-          <a>{{ user.username }}</a>
+          <a href={% url "securityforum:profile" user.profile.id%}>{{ user.username }}</a>
           <form action={% url "accounts:logout" %} method="post">
             {% csrf_token %}
             <input id="logout-btn" type="submit" value="logout"/>
