@@ -147,9 +147,12 @@ LOGGING = {
     "disable_existing_loggers": False,  # retain the default loggers
     "handlers": {
         "file": {
-            "class": "logging.FileHandler",
-            "filename": "general.log",
-            "formatter": "verbose"
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'general.log',
+            'when': 'D',  # daily, you can use 'midnight' as well
+            'backupCount': 30,  # 30 days backup
+            'formatter': 'verbose',
         },
     },
     "formatters": {
