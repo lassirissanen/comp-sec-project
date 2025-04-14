@@ -1,5 +1,11 @@
 name: Dependency check
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   dependency-check:
     runs-on: ubuntu-latest
