@@ -8,7 +8,11 @@
 }
 
 #comments-container {
-    margin-top: 2em;
+    margin-top: 3em;
+}
+
+#add-comment-section{
+    margin-top: 1em;
 }
 
 #comments-list {
@@ -24,6 +28,14 @@
 }
 
 .post-author {
+    display: flex;
+    align-items: center;
+    /* font-size: 80%; */
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
+.comment-author {
     display: flex;
     align-items: center;
     /* font-size: 80%; */

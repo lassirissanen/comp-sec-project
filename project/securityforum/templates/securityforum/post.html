@@ -37,6 +37,7 @@
     <p>{{ post.content }}</p>
   </div>
   <div id="comments-container">
+    <a class="comments-count-label">{{post.comment_set.all.count}} comments</a>
     {% if user.is_authenticated %}
     <div id="add-comment-section">
       <button id="toggle-comment" class="btn btn-primary">Add Comment</button>
@@ -56,7 +57,14 @@
       {% for comment in post.comment_set.all%}
         <li>
           <div>
-            <a class="comment-author" class="comment-author">{{ comment.author.username }}:</a>
+            <div class="comment-author">
+              {% if comment.author.profile.profile_pic %}
+              <img src="{{ comment.author.profile.profile_pic.url }}" class="profile-pic" alt="Profile Picture">
+              {% else %}
+              <img src="{% static 'images/default_profile.jpg' %}" class="profile-pic" alt="Default Profile Picture">
+              {% endif %}
+              <a class="comment-author-username" href={% url "securityforum:profile" post.author.profile.id%}>{{ post.author.username }}</a>
+            </div>
             <p class="comment-content">{{ comment.content }}</p>
           </div>
         </li>
