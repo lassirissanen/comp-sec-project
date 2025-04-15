@@ -8,7 +8,7 @@ def register_user(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, 'django.contrib.auth.backends.ModelBackend')
             # Redirect to homepage or another page
             return redirect('securityforum:home')
     else:
