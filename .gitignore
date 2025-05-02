@@ -89,7 +89,15 @@ target/
 __pycache__/
 local_settings.py
 
+# Local environment files
 .env
+.env.local
+.env.prod
+
 db.sqlite3
 
 media
+
+# Python venv
+.venv
+venv
