@@ -14,11 +14,11 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv('.env.local')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(os.path.join(BASE_DIR, '..', '.env.local'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -186,7 +186,7 @@ LOGGING = {
         "file": {
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': 'general.log',
+            'filename': os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'general.log')),
             'when': 'D',  # daily, you can use 'midnight' as well
             'backupCount': 30,  # 30 days backup
             'formatter': 'verbose',

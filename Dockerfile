@@ -1,51 +1,47 @@
 # Stage 1: Base build stage
 FROM python:3.13-slim AS builder
- 
-# Create the app directory
-RUN mkdir /app
- 
-# Set the working directory
+
 WORKDIR /app
- 
-# Set environment variables to optimize Python
+
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1 
- 
-# Install dependencies first for caching benefit
-RUN pip install --upgrade pip 
-COPY requirements.txt /app/ 
+ENV PYTHONUNBUFFERED=1
+
+RUN pip install --upgrade pip
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
- 
+
 # Stage 2: Production stage
 FROM python:3.13-slim
- 
-RUN useradd -m -r appuser && \
-   mkdir /app && \
-   chown -R appuser /app
- 
-# Copy the Python dependencies from the builder stage
+
+# 1. Create a non-root user
+RUN useradd -m -r appuser
+
+# 2. Create app directory, owned by root
+RUN mkdir /app
+
+WORKDIR /app
+
+# 3. Copy Python dependencies from builder
 COPY --from=builder /usr/local/lib/python3.13/site-packages/ /usr/local/lib/python3.13/site-packages/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
- 
-# Set the working directory
-WORKDIR /app
- 
-# Copy application code
-COPY --chown=appuser:appuser . .
- 
-# Set environment variables to optimize Python
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1 
- 
-# Switch to non-root user
-USER appuser
- 
-# Expose the application port
-EXPOSE 8000 
 
-# Make entry file executable
-RUN chmod +x  /app/entrypoint.prod.sh
- 
-# Start the application using Gunicorn
+# 4. Copy application code as root (default)
+COPY . .
+
+# 5. Create writable logs and media directories, owned by appuser
+RUN mkdir -p /var/log/django /app/project/media/profile_pics \
+    && chown appuser:appuser /var/log/django /app/project/media/profile_pics
+
+# 6. Make entrypoint executable
+RUN chmod +x /app/entrypoint.prod.sh
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# 7. Switch to non-root user for runtime
+USER appuser
+
+EXPOSE 8000
+
 WORKDIR /app/project
 CMD ["/app/entrypoint.prod.sh"]
