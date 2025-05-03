@@ -227,6 +227,7 @@ CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
         "default-src": [SELF],
         "script-src": [SELF],
+        "script-src-elem": [SELF],
         "style-src": [SELF, "cdn.jsdelivr.net"],
         "font-src": [SELF, "cdn.jsdelivr.net"],
         "img-src": [SELF],
