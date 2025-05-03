@@ -230,7 +230,7 @@ CONTENT_SECURITY_POLICY = {
         "style-src": [SELF, "cdn.jsdelivr.net"],
         "font-src": [SELF, "cdn.jsdelivr.net"],
         "img-src": [SELF],
-        "frame-ancestors": [SELF],
+        "frame-ancestors": [NONE],
         "form-action": [SELF],
     },
 }
