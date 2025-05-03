@@ -8,6 +8,7 @@ on:
       - main
 permissions:
   contents: read
+  issues: write
 jobs:
   sonarqube:
     name: SonarQube
