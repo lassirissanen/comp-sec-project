@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
+    'csp'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     # If you do not want Axes to override the authentication response
     # you can skip installing the middleware and use your own views.
     'axes.middleware.AxesMiddleware',
+    "csp.middleware.CSPMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -215,3 +217,20 @@ AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False  # Prevent resetting timer
 # Lock by username (or "ip" for IP-based)
 AXES_LOCKOUT_PARAMETERS = ["username"]
 AXES_LOCKOUT_TEMPLATE = "accounts/lockout.html"
+
+
+# Content Security Policy
+from csp.constants import SELF, NONE
+
+CONTENT_SECURITY_POLICY = {
+    "EXCLUDE_URL_PREFIXES": [NONE],
+    "DIRECTIVES": {
+        "default-src": [SELF],
+        "script-src": [SELF],
+        "style-src": [SELF, "cdn.jsdelivr.net"],
+        "font-src": [SELF, "cdn.jsdelivr.net"],
+        "img-src": [SELF],
+        "frame-ancestors": [SELF],
+        "form-action": [SELF],
+    },
+}
