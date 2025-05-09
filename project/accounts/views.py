@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistrationForm
+from django.views.decorators.http import require_http_methods
 
-
+@require_http_methods(["GET", "POST"])
 def register_user(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
