@@ -1,6 +1,7 @@
 # forms.py
 from django import forms
 from .models import Profile
+from django.core.files.uploadedfile import UploadedFile
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -10,7 +11,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
     def clean_profile_pic(self):
         profile_pic = self.cleaned_data.get('profile_pic')
-        if profile_pic:
+        if profile_pic and isinstance(profile_pic, UploadedFile):
             # Validate file size (e.g., max 5MB)
             if profile_pic.size > 5 * 1024 * 1024:
                 raise forms.ValidationError(
