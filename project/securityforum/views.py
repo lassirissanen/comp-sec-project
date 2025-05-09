@@ -1,15 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from .models import Post, Comment, Profile
 from .forms import ProfileUpdateForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_GET, require_http_methods
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
-
+@method_decorator(require_GET, "dispatch")
 class HomeView(generic.ListView):
     template_name = "securityforum/index.html"
     context_object_name = "posts"
@@ -17,7 +19,7 @@ class HomeView(generic.ListView):
     def get_queryset(self):
         return Post.objects.all()
 
-
+@method_decorator(require_GET, "dispatch")
 class PostView(generic.DetailView):
     model = Post
     context_object_name = "post"
@@ -25,11 +27,13 @@ class PostView(generic.DetailView):
 
 
 @login_required
+@require_http_methods(["GET"])
 def post_form(request):
     return render(request, "securityforum/post_form.html", {})
 
 
 @login_required
+@require_http_methods(["POST"])
 def create_post(request):
     data = request.POST
     header = data["header"]
@@ -44,6 +48,7 @@ def create_post(request):
 
 
 @login_required
+@require_http_methods(["POST"])
 def add_comment(request):
     data = request.POST
     content = data["content"]
@@ -54,7 +59,7 @@ def add_comment(request):
     new_comment.save()
     return HttpResponseRedirect(reverse("securityforum:post", args=(post_id,)))
 
-
+@method_decorator(require_GET, "dispatch")
 class ProfileView(generic.DetailView):
     model = Profile
     context_object_name = "user_profile"
@@ -62,6 +67,7 @@ class ProfileView(generic.DetailView):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(
