@@ -7,6 +7,8 @@ Course project for secure programming course. The application is a simple web fo
 
 # Usage
 
+Copy the example .env files to `.env.local` and `.env.prod`
+
 ## local
 
 install dependencies:
