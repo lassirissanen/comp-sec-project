@@ -32,7 +32,7 @@ Run the application:
 py manage.py runserver
 ```
 
-The app will we accessible at port 8000
+The app will be accessible at port 8000
 
 ## "production" with docker compose
 
@@ -41,4 +41,4 @@ Run:
 docker compose up -d --build
 ```
 
-The app will we accessible at port 8001
+The app will be accessible at port 8001
